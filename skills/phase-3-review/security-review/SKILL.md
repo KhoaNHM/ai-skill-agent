@@ -66,3 +66,4 @@ Run on every implementation before marking Phase 3 complete.
 ```
 
 Append any new findings to `.ai/memory/patterns/anti-patterns.md`.
+**Read back** `anti-patterns.md` — confirm the new findings appear at the end of the file.

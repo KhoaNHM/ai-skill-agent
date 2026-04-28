@@ -82,7 +82,10 @@ Error responses:
 
 ## Output
 
-Write the full contract to `.ai/memory/architecture/api-contracts.md`:
+Write the full contract to `.ai/memory/architecture/api-contracts.md`.
+**Read back** `api-contracts.md` after writing — confirm all endpoints, request/response shapes, and status codes are present before handing off to Engineer.
+
+Template:
 
 ```markdown
 ---

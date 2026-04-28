@@ -31,9 +31,9 @@ Invoke after Phase 0 is complete and requirements are approved. Always run for n
 5. Create an ADR for each significant architectural decision.
 6. Write architecture output to `.ai/memory/architecture/`.
 7. Update `.ai/memory/context/tech-stack.md` with any new technology decisions and rationale.
-8. Write handoff to `.ai/memory/handoffs/architect→engineer.md`.
+8. Write handoff to `.ai/memory/handoffs/architect→engineer.md` with `approved-by: —` in the frontmatter.
 9. Present plan to human — **do not proceed to Phase 2 without explicit approval**.
-10. Update `.ai/memory/INDEX.md` Phase 1 status → ✅ Complete after approval.
+10. After human approves: update `approved-by:` in the handoff frontmatter to `approved-by: human` and update `.ai/memory/INDEX.md` Phase 1 status → ✅ Complete.
 
 ## Output format
 

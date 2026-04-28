@@ -27,7 +27,7 @@ Invoke after Phase 2 is complete. Always run — no exceptions. Block merging un
 2. Identify security risks: destructive operations, cross-scope data access, unbounded queries, missing isolation filters.
 3. Verify API shape matches contract in `.ai/memory/architecture/api-contracts.md`.
 4. Append security findings to `.ai/memory/patterns/anti-patterns.md`.
-5. Update `.ai/memory/INDEX.md` Phase 3 status → ✅ Complete (if go) or 🔄 Revise.
+5. Update `.ai/memory/INDEX.md` Phase 3 status → ✅ Complete (if go) or ⚠️ Revise.
 
 ## Output format
 

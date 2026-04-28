@@ -11,9 +11,11 @@ Every agent in this workflow reads and writes to `.ai/memory/` in the project be
 
 1. Check if `.ai/memory/` exists in the project.
    - If not: run `tooling/init-memory` skill to create it.
-2. Read `.ai/memory/INDEX.md` — always, before any other action.
-3. Read the handoff file for your current phase (listed in INDEX.md).
-4. Read `.ai/memory/patterns/anti-patterns.md` — prevent repeat mistakes.
+2. **Read** `.ai/memory/INDEX.md` — always, before any other action. Do not infer phase status from conversation history.
+3. **Read** the handoff file for your current phase (path listed in INDEX.md Current Handoff section).
+4. **Read** `.ai/memory/patterns/anti-patterns.md` — prevent repeat mistakes.
+
+**Verification:** After reading INDEX.md, state the current phase and status out loud (e.g., "Phase 1 is ✅ Complete, Phase 2 is ⏳ Pending") so the human can catch stale assumptions immediately.
 
 ## Memory file format
 
@@ -109,3 +111,5 @@ The INDEX.md is the map. Keep it up to date after each phase completes.
 3. Always update `INDEX.md` after writing a file (add/update the link and phase status).
 4. Keep the Summary section scannable — the next agent should understand it in 10 seconds.
 5. Archive superseded decisions by setting `status: superseded` and linking the replacement ADR.
+6. **Read back after writing.** After writing any memory file, read it back immediately to confirm it was saved with the correct content and updated frontmatter. Do not report success until you have read the file.
+7. **Never infer file state from conversation.** Always read the file to get current state. If unsure whether a file exists, check — do not assume.

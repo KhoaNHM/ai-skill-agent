@@ -5,7 +5,9 @@ alwaysApply: true
 
 # Master Workflow Lifecycle
 
-Every coding task follows this sequence. Do not skip phases or gates.
+Every coding task follows this sequence.
+
+**Phases may be skipped when their stated skip criteria are met. Gates within an active phase may never be skipped.**
 
 ## Flow
 

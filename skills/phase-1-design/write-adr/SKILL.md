@@ -59,13 +59,15 @@ What forces are at play (performance, security, team conventions, deadlines)?]
 - [What must be done next because of this decision]
 
 ## References
-- [requirements.md](../context/requirements.md)
+- [requirements.md](../../context/requirements.md)
 - [Related ADR](./NNN-related.md)
 ```
 
 ## After writing
 
-Add the ADR link to `.ai/memory/INDEX.md` under the Architecture section:
-```
-- ADR-NNN: [Decision Title](architecture/decisions/NNN-short-name.md)
-```
+1. **Read back** the ADR file — confirm all sections (Context, Options, Decision, Consequences) are present and `status: active`.
+2. Add the ADR link to `.ai/memory/INDEX.md` under the Architecture section:
+   ```
+   - ADR-NNN: [Decision Title](architecture/decisions/NNN-short-name.md)
+   ```
+3. **Read back** `INDEX.md` — confirm the new ADR link appears.

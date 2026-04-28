@@ -60,4 +60,5 @@ Bad:  fixed the export thing / working on export
 
 ## After PR created
 
-Update `.ai/memory/INDEX.md` Phase 4 status → ✅ Complete.
+1. Update `.ai/memory/INDEX.md` Phase 4 status → ✅ Complete.
+2. **Read back** `INDEX.md` — confirm Phase 4 row shows ✅ Complete.
