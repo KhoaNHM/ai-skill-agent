@@ -27,7 +27,10 @@ Invoke after Phase 2 is complete. Always run — no exceptions. Block merging un
 2. Identify security risks: destructive operations, cross-scope data access, unbounded queries, missing isolation filters.
 3. Verify API shape matches contract in `.ai/memory/architecture/api-contracts.md`.
 4. Append security findings to `.ai/memory/patterns/anti-patterns.md`.
-5. Update `.ai/memory/INDEX.md` Phase 3 status → ✅ Complete (if go) or ⚠️ Revise.
+5. Update `.ai/memory/INDEX.md` Phase 3 status based on verdict:
+   - `go` → ✅ Complete — proceed to Phase 4
+   - `revise` → ⚠️ Revise — return to Phase 2: Engineer fixes the listed issues, then re-runs Phase 3
+   - `block` → 🚫 Blocked — return to Phase 1: Architect must revise the design; `approved-by:` in `architect→engineer.md` must be reset to `—` before Phase 2 can restart; do NOT attempt to fix design flaws with code patches
 
 ## Output format
 

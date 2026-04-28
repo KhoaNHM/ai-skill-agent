@@ -86,6 +86,16 @@ DONE
 **Agent:** `agents/03-qa-security.md`
 **Skills:** `phase-3-review/qa-checklist`, `phase-3-review/security-review`
 
+### Phase 3 failure transitions
+
+| Verdict | Meaning | Next step |
+|---------|---------|-----------|
+| `go` | All ACs covered, no blocking issues | → Phase 4 |
+| `revise` | Implementation gaps or non-critical issues | → Phase 2: Engineer fixes, re-runs Phase 3 |
+| `block` | Design flaw, missing AC, or critical security issue that cannot be fixed in code | → Phase 1: Architect revises plan, human re-approves, `approved-by:` reset to `—` before Phase 2 restarts |
+
+**Rule:** An agent must never attempt to fix a `block` verdict with implementation patches. A `block` means the design is wrong — go back to the Architect.
+
 ## Phase 4 — Ship
 
 **Precondition:** Phase 3 verdict is `go`.
