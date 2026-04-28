@@ -12,6 +12,7 @@ Invoke only after Phase 1 plan has explicit human approval. Read the approved pl
 
 1. Read `.ai/memory/INDEX.md` (always)
 2. Read `.ai/memory/handoffs/architect→engineer.md` (the approved plan)
+   - **Check `approved-by:` in the frontmatter.** If it shows `approved-by: —`, stop immediately — Phase 1 has not been approved. Do not write any code until the human updates it to `approved-by: human`.
 3. Read `.ai/memory/patterns/anti-patterns.md` (prevent repeat mistakes)
 4. Read `.ai/memory/architecture/api-contracts.md` (API truth)
 

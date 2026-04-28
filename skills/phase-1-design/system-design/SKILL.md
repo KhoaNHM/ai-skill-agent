@@ -60,8 +60,9 @@ Use to produce the architecture plan for a new feature or significant change.
 4. **Read back** `api-contracts.md` — confirm all endpoints, DTOs, and status codes are present.
 5. Update `.ai/memory/context/tech-stack.md` with any new technology decisions and rationale
 6. Run `phase-1-design/write-adr` for each significant decision
-7. Write to `.ai/memory/handoffs/architect→engineer.md`
-8. **Read back** `architect→engineer.md` — confirm approved plan, file list, and verification steps are present.
+7. Write to `.ai/memory/handoffs/architect→engineer.md` — include `approved-by: —` in the frontmatter.
+8. **Read back** `architect→engineer.md` — confirm plan, file list, and `approved-by: —` are present.
 9. Update `.ai/memory/INDEX.md` Phase 1 status and Current Handoff section
 10. **Read back** `INDEX.md` — confirm Phase 1 row and Current Handoff point to correct files.
 11. Present plan to human — **wait for explicit approval before any code**
+12. After human approves: update `approved-by: —` → `approved-by: human` in `architect→engineer.md`.

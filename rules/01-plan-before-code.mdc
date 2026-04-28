@@ -41,3 +41,8 @@ A valid plan must contain all five:
 ## On broken code
 
 If the implementation is going wrong: **stop and revert**. Do not layer fixes on top of broken code. Refine the plan and re-implement from scratch — this is faster and cleaner than fix-on-fix.
+
+**Revert means non-destructive undo only:**
+- Restore changed files with `git restore <file>` or `git stash`
+- Never run `git reset --hard`, `git push --force`, or delete branches without explicit human instruction
+- If unsure what to revert, list the changed files and ask the human which to restore
