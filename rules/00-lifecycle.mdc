@@ -1,0 +1,98 @@
+---
+description: Master workflow lifecycle — phase gates, agent sequence, and memory checkpoints for every coding task
+alwaysApply: true
+---
+
+# Master Workflow Lifecycle
+
+Every coding task follows this sequence. Do not skip phases or gates.
+
+## Flow
+
+```
+START
+  ↓
+[Phase 0] BA Strategist — Requirements & Acceptance Criteria
+  Gate: requirements.md written, human has seen it
+  ↓
+[Phase 1] Architect — System Design & API Contracts
+  Gate: plan written, human approves before any code
+  ↓
+[Phase 2] Engineer — Implementation
+  Gate: lint + typecheck + tests all pass
+  ↓
+[Phase 3] QA / Security — Review & Validation
+  Gate: all AC covered, verdict is "go"
+  ↓
+[Phase 4] Ship — PR creation & merge checklist
+  ↓
+DONE
+```
+
+## Phase 0 — Requirements
+
+**When:** Requirements are ambiguous, AC are missing, task touches auth/data-isolation/external integrations.
+**Skip when:** Task is clear, small, and well-scoped.
+
+**Produces:**
+- `.ai/memory/context/requirements.md` — user story, numbered AC, edge cases
+- `.ai/memory/handoffs/ba→architect.md` — summary for Architect
+
+**Agent:** `agents/00-ba-strategist.md`
+**Skill:** `phase-0-requirements/gather-requirements`
+
+## Phase 1 — Architecture
+
+**When:** New features, new endpoints, schema changes, new modules, cross-cutting concerns.
+**Skip for:** Bug fixes in existing code that don't change structure or APIs.
+
+**Produces:**
+- `.ai/memory/architecture/module-map.md`
+- `.ai/memory/architecture/api-contracts.md`
+- `.ai/memory/architecture/decisions/NNN-[name].md` (one ADR per significant decision)
+- `.ai/memory/context/tech-stack.md` (updated with new technology decisions and rationale)
+- `.ai/memory/handoffs/architect→engineer.md`
+
+**Gate: Human must explicitly approve the plan before Phase 2 begins.**
+
+**Agent:** `agents/01-architect.md`
+**Skills:** `phase-1-design/system-design`, `phase-1-design/api-design`, `phase-1-design/write-adr`
+
+## Phase 2 — Implementation
+
+**Precondition:** Phase 1 approved. Read `.ai/memory/handoffs/architect→engineer.md` first.
+
+**Rules:**
+- Implement the approved plan only — zero scope expansion.
+- Pre-implementation gate: DTOs/Swagger, docs sync, pure vs service split, safety validation, response shape.
+- Validation loop: lint → typecheck/build → tests. Loop on any failure.
+- Write new patterns and pitfalls discovered to `.ai/memory/patterns/` during implementation.
+
+**Agent:** `agents/02-engineer.md`
+**Skills:** `phase-2-implement/tdd`, `phase-2-implement/clean-code`
+
+## Phase 3 — Review
+
+**Always run. No exceptions.**
+
+**Produces:**
+- QA verdict: `go | revise | block`
+- Each AC mapped to a test or manual verification
+- Security checklist result
+- Findings appended to `.ai/memory/patterns/anti-patterns.md`
+
+**Agent:** `agents/03-qa-security.md`
+**Skills:** `phase-3-review/qa-checklist`, `phase-3-review/security-review`
+
+## Phase 4 — Ship
+
+**Precondition:** Phase 3 verdict is `go`.
+
+**Skills:** `phase-4-ship/pr-ship`, `phase-4-ship/babysit`
+
+## Continuous improvement
+
+After every implementation:
+1. Append pitfalls to `.ai/memory/patterns/anti-patterns.md`
+2. Append solutions to `.ai/memory/patterns/solutions.md`
+3. Update `.ai/memory/INDEX.md` phase status table

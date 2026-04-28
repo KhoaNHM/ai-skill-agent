@@ -1,0 +1,29 @@
+---
+type: pattern
+phase: any
+last-updated: YYYY-MM-DD
+updated-by: [AGENT_NAME]
+status: active
+---
+
+# [Solutions | Anti-patterns] — [Project Name]
+
+<!-- Append entries below. Never delete — add a [SUPERSEDED] tag if outdated. -->
+
+## Entry 001 — [Short title]
+
+**Date:** YYYY-MM-DD
+**Phase found:** [0-ba | 1-architect | 2-engineer | 3-qa]
+**Added by:** [agent name]
+
+**Situation:** [When does this apply?]
+
+**[What worked / What went wrong]:**
+[Description]
+
+**[Do this / Avoid this]:**
+[Concrete instruction]
+
+**Why:** [Root cause or reason]
+
+---
