@@ -1,0 +1,73 @@
+---
+description: Security baseline — auth, input validation, error handling, secrets, observability, CTO threat model
+alwaysApply: true
+---
+
+# Security Baseline
+
+## Auth
+
+- Use short-lived tokens (e.g. JWT), least privilege, secure refresh flow.
+- Never log or expose secrets, tokens, or credentials.
+- Every endpoint accepting user input is an attack surface.
+- Validate scope/tenant on every authenticated request — auth checks identity, not intent.
+
+## Input Validation
+
+- Validate and sanitize all user-supplied inputs at the DTO/controller boundary.
+- Allowlist over blocklist: explicitly permit known-safe values.
+- Reject early: don't let invalid data reach the service or DB layer.
+- Limit length, format, and type; use parameterized queries (never string-concatenated queries).
+
+## Error Handling
+
+- Log full detail server-side with context (path, method, request ID).
+- Return generic, safe messages to clients — no stack traces, no internals, no field names that reveal schema.
+- Use framework HTTP exception types (e.g. `NotFoundException`, `BadRequestException`) for consistent status codes.
+- Prefer a global exception filter to normalize error shape and log centrally.
+
+## Observability
+
+- Structured logs (JSON); configurable levels (log, error, warn, debug).
+- Include request / correlation ID in every log entry for tracing.
+- Categorize: client errors (4xx), server errors (5xx), third-party/timeouts.
+- For external I/O: retries with backoff and circuit breakers to prevent cascade failures.
+
+## Secrets
+
+- No secrets in code or version control.
+- Use env vars or a vault; document required vars in `.env.example`.
+- Validate required env vars at startup; fail fast if missing.
+- Rotate keys periodically.
+
+## Transport
+
+- HTTPS only.
+- Rate limiting and CORS for public APIs.
+
+## CTO Threat Model
+
+Before writing or approving any code, ask three questions:
+
+1. **What can go wrong?** — Edge cases, invalid input, partial failures.
+2. **Who can abuse this?** — Untrusted callers, tenant boundary violations, destructive payloads.
+3. **Does it scale?** — Data growth, traffic spikes, N+1 queries, unbounded loops.
+
+**Blast-radius gate:**
+
+| If a bug causes... | Required guard |
+|--------------------|----------------|
+| Data loss / mutation | Input validation + allowlist + integration test |
+| Cross-tenant data leak | Tenant-prefix enforcement + ownership check |
+| Unbounded cost (CPU / memory) | Pagination, limit, timeout, or circuit breaker |
+| Service downtime | Graceful degradation, retry with backoff, alerting |
+
+**Common rationalizations — never accept these:**
+
+| Excuse | Reality |
+|--------|---------|
+| "It's internal only" | Internal APIs get exposed; least-privilege still applies |
+| "We'll optimize later" | "Later" rarely arrives; add a limit now |
+| "Auth already protects this" | Auth checks identity, not intent |
+| "Nobody would send that" | Attackers send exactly what you don't expect |
+| "It's just a read query" | `$merge`, `$out`, `$lookup` into system collections are not reads |

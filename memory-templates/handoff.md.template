@@ -1,0 +1,27 @@
+---
+type: handoff
+phase: [N]-[agent]
+last-updated: YYYY-MM-DD
+updated-by: [AGENT_NAME]
+status: active
+---
+
+# Handoff: [From Agent] → [To Agent]
+
+## Summary
+[One sentence: what was completed and what the next agent should do.]
+
+## What was produced
+- [output 1]
+- [output 2]
+
+## What the next agent needs to know
+- [key fact 1]
+- [key constraint]
+- [security or isolation requirement]
+
+## Open questions for next phase
+- [ ] [question]
+
+## References
+- [relevant memory file](../context/file.md)

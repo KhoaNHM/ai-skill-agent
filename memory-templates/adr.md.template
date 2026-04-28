@@ -1,0 +1,36 @@
+---
+type: adr
+phase: 1-architect
+last-updated: YYYY-MM-DD
+updated-by: ARCHITECT_AGENT
+status: active
+---
+
+# ADR-NNN — [Decision Title]
+
+## Status
+Accepted | Proposed | Superseded by [ADR-NNN]
+
+## Context
+[What is the situation that requires a decision? What constraints exist?]
+
+## Options Considered
+
+### Option A — [Name]
+- Pro: [advantage]
+- Con: [disadvantage]
+
+### Option B — [Name]
+- Pro: [advantage]
+- Con: [disadvantage]
+
+## Decision
+[Which option and the single most important reason.]
+
+## Consequences
+- [What becomes easier]
+- [What becomes harder]
+- [What must be done next]
+
+## References
+- [requirements.md](../context/requirements.md)

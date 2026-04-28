@@ -1,0 +1,43 @@
+---
+description: Block source file edits until a written plan exists and has explicit human approval
+alwaysApply: true
+---
+
+# Plan-Before-Code Gate
+
+## Rule
+
+Do not write, edit, or delete production source files until a written plan exists and has been explicitly approved by the human.
+
+## What counts as a plan
+
+A valid plan must contain all five:
+
+1. **Goal** — one sentence: what changes and why.
+2. **Files affected** — list of files to create, edit, or delete with paths.
+3. **Steps** — numbered, ordered, specific (not "update the service" — name the method and what it does).
+4. **Verification** — how to confirm correctness: lint command, typecheck command, test command, manual check steps.
+5. **Risks** — what could go wrong and the mitigation.
+
+## When to always plan
+
+- Task is 3 or more steps
+- Task touches a public API, shared module, database schema, auth, or cross-cutting concern
+- Scope is unclear or involves a new pattern
+
+## How to get approval
+
+1. Output the plan.
+2. Stop. Wait for the human to say "approved", "go", "looks good", or equivalent affirmative.
+3. Only then begin implementation.
+4. If implementation diverges from the approved plan: stop, state the divergence explicitly, get re-approval before continuing.
+
+## Exceptions (no plan needed)
+
+- Typo fixes or comment-only edits
+- Fixing lint/typecheck errors introduced in the same session
+- Human explicitly says "skip plan" or "just do it"
+
+## On broken code
+
+If the implementation is going wrong: **stop and revert**. Do not layer fixes on top of broken code. Refine the plan and re-implement from scratch — this is faster and cleaner than fix-on-fix.

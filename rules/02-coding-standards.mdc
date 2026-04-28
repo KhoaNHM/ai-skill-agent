@@ -1,0 +1,112 @@
+---
+description: Coding standards — MongoDB, TypeScript, functions, SOLID, performance, DRY/YAGNI/KISS, API design, design patterns, context efficiency
+alwaysApply: true
+---
+
+# Coding Standards
+
+## Git policy
+
+Never push code unless the user explicitly requests it. Commit locally when asked; wait for an explicit "push" instruction before running `git push`.
+
+## Request format
+
+For every non-trivial request, first output a short JSON spec, then execute it:
+
+```json
+{
+  "intent": "one-line goal",
+  "context": { "project": "", "filesOrArea": "", "relevantRules": [], "relevantSkills": [] },
+  "constraints": [],
+  "expectedOutput": ""
+}
+```
+
+Skip the JSON only for pure acknowledgments ("ok", "thanks"). Any code/docs/planning change → JSON first.
+
+## MongoDB
+
+**Indexes:** Single-field for hot filters; compound for multiple fields (leading fields matter). Unique / TTL / sparse as needed. Verify with `.explain("executionStats")`. Never index two or more array fields in a compound index.
+
+**Queries (F-P-S-L):** Filter → Project → Sort → Limit. Filter first; project only needed fields; sort on indexed fields; always limit/skip for pagination. Use `$match` → `$group` → `$sort` in aggregations. Avoid `$where` / JavaScript execution.
+
+**Schema:** Embed when read together and small/stable; reference when one-to-many or data grows. Avoid deep nesting; use proper types; don't let arrays grow unbounded; one naming convention (e.g. `camelCase`).
+
+## Functions
+
+- **Document every function:** JSDoc with `@param` / `@returns` for public or non-obvious APIs.
+- **Prefer pure:** Same inputs → same output, no side effects. Keep I/O (DB, HTTP) in a thin layer.
+- **Keep functions small:** One task per function, ~20–30 lines. If it validates + fetches + transforms, split into named steps.
+
+## TypeScript
+
+- Explicit return types; no `any` (use `unknown` or concrete types); `const` over `let`.
+- Early returns over deep nesting; `?.` and `??`; descriptive names (verbs for functions, nouns for variables).
+- Performance: cache `arr.length` in loops; Map/Set for lookups; `for`/`for-of` in tight loops.
+- Always run `npx tsc --noEmit` (or the project's build script) before marking work done.
+- Match existing import style (aliases vs relative); respect `tsconfig` `baseUrl` / `paths`.
+
+## SOLID
+
+- **S** — One class/module, one reason to change.
+- **O** — Open for extension, closed for modification; prefer composition/DI over growing switch chains.
+- **L** — Subtypes substitutable for base; don't break contracts.
+- **I** — Small, role-specific interfaces; clients don't depend on unused methods.
+- **D** — Depend on abstractions; inject dependencies for swappability.
+
+**Code smells reference:**
+
+| Smell | Symptom | Direction |
+|-------|---------|-----------|
+| Rigidity | Small change forces many edits | Loosen coupling |
+| Fragility | Change breaks unrelated code | Stabilize boundaries |
+| Immobility | Hard to reuse | Extract shared pieces |
+| Viscosity | Wrong thing is easier than right thing | Templates, clear APIs |
+| Needless complexity | Abstraction without payoff | KISS |
+| Needless repetition | Same logic copied | DRY |
+| Opacity | Hard to read intent | Names, structure, small functions |
+
+## Performance
+
+- **Before coding:** Is this a hot path? Does it scale with data/traffic? N+1 risk?
+- **While coding:** Batch over per-item; cache lookups (Map/Set); paginate; index filters/sorts.
+- **Trade-off:** Correctness and clarity first; then optimize. Document when choosing simplicity over speed.
+
+## DRY, YAGNI, KISS
+
+- **DRY:** One place per logic; extract helpers/modules; no copy-paste.
+- **YAGNI:** Build only what's needed now; skip speculative features.
+- **KISS:** Simplest solution that works; clarity over cleverness.
+
+## API Design (REST)
+
+- **Design-first:** Clarify consumer, use cases, and constraints before coding; validate with request/response examples.
+- **Resources:** Plural nouns (`/users`); stateless requests.
+- **Verbs:** GET read, POST create, PUT/PATCH update, DELETE remove.
+- **Status codes:** 200, 201, 400, 401, 403, 404, 409, 500.
+- **Docs:** OpenAPI/Swagger; document all params, responses, and errors; keep in sync with code.
+- **Versioning:** URL or header versioning; never break existing consumers without a new version.
+
+## Design Patterns
+
+Apply when a pattern clearly solves a recurring problem. Don't apply speculatively.
+
+- **Repository** — abstract data access
+- **Factory** — complex or conditional creation
+- **Strategy** — interchangeable algorithms
+- **Dependency Injection** — inversion of control
+- **Adapter** — integrate external APIs
+- **Template Method** — shared algorithm, varying steps
+
+Introduce a named pattern on the **third** clear repetition, not the first. Always add a short comment naming the pattern when you use one.
+
+## Context Efficiency
+
+- Search before read: use grep/semantic search to find relevant lines before opening full files.
+- Minimal context: only pull in files and sections directly relevant to the task.
+- Progressive disclosure: start with signatures and summaries; read full implementations only when needed.
+- Diff-first reviews: read `git diff` before reading entire files.
+
+## Validation Loop
+
+Implement → lint → typecheck (`tsc --noEmit`) → tests → fix → repeat until clean. Do not commit while lint or typecheck fails.

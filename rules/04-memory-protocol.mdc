@@ -1,0 +1,111 @@
+---
+description: Memory protocol — when and what every agent reads from and writes to .ai/memory/ at each phase
+alwaysApply: true
+---
+
+# Memory Protocol
+
+Every agent in this workflow reads and writes to `.ai/memory/` in the project being worked on. Memory is plain markdown — any AI model or human can read and write it.
+
+## Start of every session
+
+1. Check if `.ai/memory/` exists in the project.
+   - If not: run `tooling/init-memory` skill to create it.
+2. Read `.ai/memory/INDEX.md` — always, before any other action.
+3. Read the handoff file for your current phase (listed in INDEX.md).
+4. Read `.ai/memory/patterns/anti-patterns.md` — prevent repeat mistakes.
+
+## Memory file format
+
+Every file in `.ai/memory/` uses this frontmatter:
+
+```markdown
+---
+type: context | architecture | handoff | pattern | adr
+phase: 0-ba | 1-architect | 2-engineer | 3-qa | any
+last-updated: YYYY-MM-DD
+updated-by: BA_AGENT | ARCHITECT_AGENT | ENGINEER_AGENT | QA_AGENT | human
+status: draft | active | superseded
+---
+
+# Title
+
+## Summary
+One paragraph — readable without opening full details.
+
+## Details
+[full content]
+
+## Open Questions
+- [ ] [question the next phase must resolve]
+
+## References
+- [related file](../relative/path.md)
+```
+
+## Phase write responsibilities
+
+### Phase 0 (BA) writes:
+- `.ai/memory/context/requirements.md` — user story, numbered AC, edge cases, non-functional reqs
+- `.ai/memory/context/non-functional.md` — performance, scale, security constraints
+- `.ai/memory/handoffs/ba→architect.md` — what BA produced, what Architect needs, open questions
+
+### Phase 1 (Architect) writes:
+- `.ai/memory/architecture/module-map.md` — module boundaries, DI, layer diagram
+- `.ai/memory/architecture/api-contracts.md` — endpoint, DTOs, request/response shapes, status codes
+- `.ai/memory/architecture/decisions/NNN-[decision-name].md` — one ADR per significant decision
+- `.ai/memory/context/tech-stack.md` — technology choices and rationale for the feature
+- `.ai/memory/handoffs/architect→engineer.md` — approved plan with file list, steps, verification
+
+### Phase 2 (Engineer) writes:
+- `.ai/memory/patterns/solutions.md` — append any reusable approach discovered
+- `.ai/memory/patterns/anti-patterns.md` — append any pitfall hit
+- `.ai/memory/handoffs/engineer→qa.md` — what was built, test entry points, known edge cases
+
+### Phase 3 (QA/Security) writes:
+- `.ai/memory/patterns/anti-patterns.md` — append security/quality findings
+- Updates `.ai/memory/INDEX.md` Phase 3 status
+
+## INDEX.md structure
+
+The INDEX.md is the map. Keep it up to date after each phase completes.
+
+```markdown
+# Memory Index — [Project Name]
+
+> Read this first. Load only files relevant to your current phase.
+
+## Phase Status
+| Phase | Status | Owner | Last Updated |
+|-------|--------|-------|--------------|
+| 0 · Requirements | ⏳ Pending | BA_AGENT | — |
+| 1 · Architecture | ⏳ Pending | ARCHITECT_AGENT | — |
+| 2 · Implementation | ⏳ Pending | ENGINEER_AGENT | — |
+| 3 · QA / Review | ⏳ Pending | QA_AGENT | — |
+| 4 · Ship | ⏳ Pending | — | — |
+
+## Active Context
+- [Requirements](context/requirements.md) — [one-line summary or "not yet written"]
+- [Tech Stack](context/tech-stack.md) — [one-line summary or "not yet written"]
+- [Non-functional](context/non-functional.md) — [one-line summary or "not yet written"]
+
+## Architecture
+- [Module Map](architecture/module-map.md)
+- [API Contracts](architecture/api-contracts.md)
+- ADRs: (list links as written)
+
+## Current Handoff
+→ [Phase N handoff file](handoffs/x→y.md) — [status]
+
+## Patterns
+- [Solutions](patterns/solutions.md)
+- [Anti-patterns](patterns/anti-patterns.md)
+```
+
+## Rules for writing to memory
+
+1. Never overwrite — always append to patterns files.
+2. Always update the `last-updated` and `updated-by` frontmatter fields.
+3. Always update `INDEX.md` after writing a file (add/update the link and phase status).
+4. Keep the Summary section scannable — the next agent should understand it in 10 seconds.
+5. Archive superseded decisions by setting `status: superseded` and linking the replacement ADR.
