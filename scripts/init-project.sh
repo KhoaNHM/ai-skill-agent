@@ -93,11 +93,36 @@ write_placeholder "patterns/anti-patterns.md"         pattern      any          
 
 touch "$MEMORY_ROOT/architecture/decisions/.gitkeep"
 
+# Entry point files — one per AI tool, all identical content
+ENTRY_CONTENT='# AI Memory Protocol
+
+Read `.ai/memory/INDEX.md` FIRST at the start of every session — before any other action.
+
+Never assume phase status or file contents from conversation history. Read the actual file.
+
+## Memory structure
+- `.ai/memory/INDEX.md` — phase status and links to all memory files
+- `.ai/memory/context/` — requirements, tech stack, non-functional
+- `.ai/memory/architecture/` — module map, API contracts, ADRs
+- `.ai/memory/handoffs/` — phase-to-phase transfer notes
+- `.ai/memory/patterns/` — solutions and anti-patterns
+
+## Rules
+1. Read INDEX.md first. State the current phase and status before doing any work.
+2. After writing any memory file, read it back immediately to confirm correct content.
+3. Do not report a phase complete until you have read back the updated INDEX.md.
+4. Do not infer file state from conversation — read the file.'
+
+for f in CLAUDE.md AGENTS.md WINDSURF.md AI_CONTEXT.md; do
+    echo "$ENTRY_CONTENT" > "$PROJECT_ROOT/$f"
+    echo "  [created] $f"
+done
+
 echo ""
 echo "Done. .ai/memory/ created with 11 files."
 echo ""
 echo "Recommended: commit this to git so decisions are version-controlled."
-echo "  git add .ai/memory/"
+echo "  git add CLAUDE.md AGENTS.md WINDSURF.md AI_CONTEXT.md .ai/memory/"
 echo "  git commit -m 'chore: init AI memory'"
 echo ""
 echo "Next step: start Phase 0 with agents/00-ba-strategist.md"

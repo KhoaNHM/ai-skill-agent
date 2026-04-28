@@ -97,3 +97,15 @@ Add to Current Handoff section:
 ```
 → [BA → Architect](handoffs/ba→architect.md) — ready for Phase 1
 ```
+
+## Verify before finishing
+
+Read back all three files you just wrote and confirm:
+
+| File | Check |
+|------|-------|
+| `context/requirements.md` | `status: active`, all ACs numbered, no empty sections |
+| `handoffs/ba→architect.md` | `status: active`, open questions listed |
+| `INDEX.md` | Phase 0 row shows ✅ Complete, requirements link present |
+
+Do not report Phase 0 complete until all three checks pass.

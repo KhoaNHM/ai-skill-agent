@@ -9,9 +9,12 @@ Use to verify implementation completeness against requirements before marking Ph
 
 ## Memory — read first
 
-1. `.ai/memory/context/requirements.md` — acceptance criteria
-2. `.ai/memory/handoffs/engineer→qa.md` — what was built
-3. `.ai/memory/architecture/api-contracts.md` — expected API shape
+1. **Read** `.ai/memory/INDEX.md` — confirm Phase 2 is ✅ Complete before starting QA.
+2. **Read** `.ai/memory/context/requirements.md` — acceptance criteria (count the ACs).
+3. **Read** `.ai/memory/handoffs/engineer→qa.md` — what was built.
+4. **Read** `.ai/memory/architecture/api-contracts.md` — expected API shape.
+
+If Phase 2 is not ✅ Complete in INDEX.md, stop and alert the human — do not run QA on incomplete work.
 
 ## AC coverage mapping
 
@@ -50,17 +53,42 @@ Compare the implementation against `.ai/memory/architecture/api-contracts.md`:
 
 ## Output
 
+Write the QA result to `.ai/memory/handoffs/qa-result.md`:
+
+```markdown
+---
+type: handoff
+phase: 3-qa
+last-updated: YYYY-MM-DD
+updated-by: QA_AGENT
+status: active
+---
+
+# QA Review Result
+
+## Verdict
+go | revise | block
+
+## AC Coverage
+| AC | Test / Verification | Status |
+|----|---------------------|--------|
+| AC-01 | [test name] | ✅ |
+| AC-02 | [manual step] | ❌ |
+
+## Contract match
+✅ / ❌ [difference if any]
+
+## Regression status
+✅ all passing / ❌ [failing test name]
+
+## Blocking items
+- [item with citation to requirements.md or api-contracts.md]
+
+## Non-blocking notes
+- [note]
 ```
-### QA Review Result
-**Verdict:** go | revise | block
 
-**AC Coverage:**
-- AC-01: ✅ [test-name]
-- AC-02: ❌ missing — needs: [what]
-
-**Contract match:** ✅ / ❌ [difference if any]
-**Regression status:** ✅ all passing / ❌ [failing test]
-
-**Blocking:** [list blocking items with citations]
-**Non-blocking:** [list non-blocking notes]
-```
+Then:
+1. **Read back** `qa-result.md` — confirm verdict and all ACs are listed.
+2. Update `.ai/memory/INDEX.md` Phase 3 status → ✅ Complete (if verdict is `go`) or ⚠️ Revise.
+3. **Read back** `INDEX.md` — confirm Phase 3 row is updated.

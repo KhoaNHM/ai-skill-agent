@@ -13,25 +13,30 @@ Create all of the following directories and files in the **project being worked 
 
 ### Directory structure
 ```
-.ai/
-└── memory/
-    ├── INDEX.md
-    ├── context/
-    │   ├── requirements.md
-    │   ├── tech-stack.md
-    │   └── non-functional.md
-    ├── architecture/
-    │   ├── module-map.md
-    │   ├── api-contracts.md
-    │   └── decisions/
-    │       └── .gitkeep
-    ├── handoffs/
-    │   ├── ba→architect.md
-    │   ├── architect→engineer.md
-    │   └── engineer→qa.md
-    └── patterns/
-        ├── solutions.md
-        └── anti-patterns.md
+[project root]/
+├── CLAUDE.md          ← Claude Code auto-loads this
+├── AGENTS.md          ← OpenAI Codex / agent frameworks auto-load this
+├── WINDSURF.md        ← Windsurf IDE auto-loads this
+├── AI_CONTEXT.md      ← generic fallback for any model
+└── .ai/
+    └── memory/
+        ├── INDEX.md
+        ├── context/
+        │   ├── requirements.md
+        │   ├── tech-stack.md
+        │   └── non-functional.md
+        ├── architecture/
+        │   ├── module-map.md
+        │   ├── api-contracts.md
+        │   └── decisions/
+        │       └── .gitkeep
+        ├── handoffs/
+        │   ├── ba→architect.md
+        │   ├── architect→engineer.md
+        │   └── engineer→qa.md
+        └── patterns/
+            ├── solutions.md
+            └── anti-patterns.md
 ```
 
 ## File contents to write
@@ -67,6 +72,31 @@ Create all of the following directories and files in the **project being worked 
 ## Patterns
 - [Solutions](patterns/solutions.md)
 - [Anti-patterns](patterns/anti-patterns.md)
+```
+
+### Entry point files — `CLAUDE.md`, `AGENTS.md`, `WINDSURF.md`, `AI_CONTEXT.md`
+
+All four files go at the **project root** and contain identical content. Each AI tool auto-loads the filename it recognizes — no tool-specific config needed.
+
+```markdown
+# AI Memory Protocol
+
+Read `.ai/memory/INDEX.md` FIRST at the start of every session — before any other action.
+
+Never assume phase status or file contents from conversation history. Read the actual file.
+
+## Memory structure
+- `.ai/memory/INDEX.md` — phase status and links to all memory files
+- `.ai/memory/context/` — requirements, tech stack, non-functional
+- `.ai/memory/architecture/` — module map, API contracts, ADRs
+- `.ai/memory/handoffs/` — phase-to-phase transfer notes
+- `.ai/memory/patterns/` — solutions and anti-patterns
+
+## Rules
+1. Read INDEX.md first. State the current phase and status before doing any work.
+2. After writing any memory file, read it back immediately to confirm correct content.
+3. Do not report a phase complete until you have read back the updated INDEX.md.
+4. Do not infer file state from conversation — read the file.
 ```
 
 ### All other files — placeholder table
@@ -105,7 +135,12 @@ Run `phase-0-requirements/gather-requirements` skill to populate this file.
 ## After running
 
 Tell the user:
+- `CLAUDE.md`, `AGENTS.md`, `WINDSURF.md`, `AI_CONTEXT.md` created at project root — any AI tool will auto-load the memory protocol on session start
 - `.ai/memory/` created with 11 files across 4 subdirectories
 - Next step: run `phase-0-requirements/gather-requirements` to begin Phase 0
 
-**Git recommendation:** Commit `.ai/memory/` to the project repo so architecture decisions, handoffs, and patterns are version-controlled alongside the code.
+**Git recommendation:** Commit everything to the project repo:
+```
+git add CLAUDE.md AGENTS.md WINDSURF.md AI_CONTEXT.md .ai/memory/
+git commit -m "chore: init AI memory"
+```

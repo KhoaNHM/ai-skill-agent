@@ -68,8 +68,13 @@ List anything needing a human decision before planning can begin:
 After completing the interview:
 
 1. Write to `.ai/memory/context/requirements.md` (use memory file template)
-2. Write to `.ai/memory/handoffs/ba→architect.md`
-3. Update `.ai/memory/INDEX.md`:
+2. **Read back** `.ai/memory/context/requirements.md` — confirm frontmatter `status: active` and all ACs are present.
+3. Write to `.ai/memory/handoffs/ba→architect.md`
+4. **Read back** `.ai/memory/handoffs/ba→architect.md` — confirm it was saved correctly.
+5. Update `.ai/memory/INDEX.md`:
    - Phase 0 status → ✅ Complete
    - Add link to requirements.md with one-line summary
-4. Present to human for review before handing off to Architect
+6. **Read back** `.ai/memory/INDEX.md` — confirm Phase 0 row shows ✅ Complete.
+7. Present to human for review before handing off to Architect.
+
+If any read-back fails (file missing or content wrong), fix and retry before presenting to human.

@@ -106,11 +106,38 @@ Run ``$($p.skill)`` skill to populate this file.
 # .gitkeep for decisions/
 "" | Set-Content "$MemoryRoot\architecture\decisions\.gitkeep" -Encoding UTF8
 
+# Entry point files — one per AI tool, all identical content
+$entryContent = @'
+# AI Memory Protocol
+
+Read `.ai/memory/INDEX.md` FIRST at the start of every session — before any other action.
+
+Never assume phase status or file contents from conversation history. Read the actual file.
+
+## Memory structure
+- `.ai/memory/INDEX.md` — phase status and links to all memory files
+- `.ai/memory/context/` — requirements, tech stack, non-functional
+- `.ai/memory/architecture/` — module map, API contracts, ADRs
+- `.ai/memory/handoffs/` — phase-to-phase transfer notes
+- `.ai/memory/patterns/` — solutions and anti-patterns
+
+## Rules
+1. Read INDEX.md first. State the current phase and status before doing any work.
+2. After writing any memory file, read it back immediately to confirm correct content.
+3. Do not report a phase complete until you have read back the updated INDEX.md.
+4. Do not infer file state from conversation — read the file.
+'@
+
+foreach ($name in @("CLAUDE.md", "AGENTS.md", "WINDSURF.md", "AI_CONTEXT.md")) {
+    Set-Content "$ProjectRoot\$name" -Value $entryContent -Encoding UTF8
+    Write-Host "  [created] $name" -ForegroundColor Green
+}
+
 Write-Host ""
 Write-Host "Done. .ai/memory/ created with 11 files." -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Recommended: commit this to git so decisions are version-controlled." -ForegroundColor Yellow
-Write-Host "  git add .ai/memory/"
+Write-Host "  git add CLAUDE.md AGENTS.md WINDSURF.md AI_CONTEXT.md .ai/memory/"
 Write-Host "  git commit -m 'chore: init AI memory'"
 Write-Host ""
 Write-Host "Next step: start Phase 0 with agents/00-ba-strategist.md" -ForegroundColor Yellow
