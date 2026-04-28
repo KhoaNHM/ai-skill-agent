@@ -11,14 +11,19 @@ set -e
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CWD="$(pwd)"
 MODE="all"
+DRY_RUN=false
 
 for arg in "$@"; do
   case $arg in
     --global)   MODE="global" ;;
     --project)  MODE="project" ;;
-    --dry-run)  MODE="dry" ;;
+    --dry-run)  DRY_RUN=true ;;
   esac
 done
+
+if [ "$DRY_RUN" = true ]; then
+  MODE="dry"
+fi
 
 # ── colour helpers ────────────────────────────────────────────────────────────
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; RESET='\033[0m'
