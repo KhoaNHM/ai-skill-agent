@@ -244,9 +244,9 @@ function Write-Memory {
     Write-Placeholder "context\non-functional.md"         "context"      "0-ba"        "Non-Functional Requirements"    "gather-requirements"
     Write-Placeholder "architecture\module-map.md"        "architecture" "1-architect" "Module Map"                     "system-design"
     Write-Placeholder "architecture\api-contracts.md"     "architecture" "1-architect" "API Contracts"                  "api-design"
-    Write-Placeholder "handoffs\ba-to-architect.md"       "handoff"      "0-ba"        "Handoff: BA to Architect"       "write-requirements-memory"
-    Write-Placeholder "handoffs\architect-to-engineer.md" "handoff"      "1-architect" "Handoff: Architect to Engineer" "system-design"
-    Write-Placeholder "handoffs\engineer-to-qa.md"        "handoff"      "2-engineer"  "Handoff: Engineer to QA"        "(written by Engineer agent)"
+    Write-Placeholder "handoffs\ba→architect.md"          "handoff"      "0-ba"        "Handoff: BA → Architect"        "write-requirements-memory"
+    Write-Placeholder "handoffs\architect→engineer.md"    "handoff"      "1-architect" "Handoff: Architect → Engineer"  "system-design"
+    Write-Placeholder "handoffs\engineer→qa.md"           "handoff"      "2-engineer"  "Handoff: Engineer → QA"         "(written by Engineer agent)"
     Write-Placeholder "patterns\solutions.md"             "pattern"      "any"         "Solutions"                      "(append during Phase 2)"
     Write-Placeholder "patterns\anti-patterns.md"         "pattern"      "any"         "Anti-patterns"                  "(append during Phase 2/3)"
 
