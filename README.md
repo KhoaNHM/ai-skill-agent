@@ -22,17 +22,14 @@ Between phases, agents write to `.ai/memory/` — plain markdown files any model
 
 ### One command
 
-**Mac / Linux / WSL:**
+**Mac / Linux / WSL / Windows (Git Bash):**
 ```bash
 bash setup.sh
 ```
 
-**Windows (PowerShell):**
-```powershell
-.\setup.ps1
-```
-
 That's it. The script auto-detects which AI tools you have installed and sets everything up.
+
+> **Windows users:** Run this in Git Bash (ships with Git for Windows) or WSL. Not PowerShell.
 
 ### What it does
 
@@ -48,17 +45,24 @@ That's it. The script auto-detects which AI tools you have installed and sets ev
 ### Flags
 
 ```bash
-bash setup.sh --global   # install to AI tools only (skip project init)
-bash setup.sh --project  # init project memory only (skip tool install)
-bash setup.sh --dry-run  # preview what would happen, no changes
+bash setup.sh --global              # install to AI tools only (skip project init)
+bash setup.sh --project             # init project memory only (skip tool install)
+bash setup.sh --dry-run             # preview without changes (combine with --global or --project)
+bash setup.sh --dir /path/to/proj   # target a specific project directory
+bash setup.sh --help                # show all options
 ```
 
 ### Per-project bootstrap
 
-Run from your project root (any git repo, Node, Python, Go, Rust project):
+Run from your project root, or use `--dir` to point at it from anywhere:
 
 ```bash
-bash /path/to/ai-skill-agent/setup.sh --project
+# option 1 — cd into your project first
+cd /your/existing/project
+bash /path/to/ai-skill-agenst/setup.sh --project
+
+# option 2 — stay anywhere, pass the path
+bash /path/to/ai-skill-agenst/setup.sh --project --dir /your/existing/project
 ```
 
 Creates at project root:
@@ -67,11 +71,27 @@ Creates at project root:
 - `WINDSURF.md` — Windsurf auto-loads this
 - `AI_CONTEXT.md` — generic fallback for any model
 - `.ai/memory/` — full memory structure (see below)
+- `.ai/discussions/` — multi-agent discussion threads (see below)
+- `.ai/bootstrap.sh` — one-command setup for new team members
 
-Commit these to git so memory is version-controlled alongside the code:
+Commit everything to git:
 ```bash
-git add CLAUDE.md AGENTS.md WINDSURF.md AI_CONTEXT.md .ai/memory/
+git add CLAUDE.md AGENTS.md WINDSURF.md AI_CONTEXT.md .ai/
 git commit -m "chore: init AI memory"
+```
+
+### New team member setup
+
+When a developer clones a project that already has `.ai/` committed, they run one command to install skills on their machine:
+
+```bash
+bash .ai/bootstrap.sh
+```
+
+The script auto-detects the skill agent repo in common locations (`~/.ai-skill-agent`, `~/ai-skill-agenst`). If not found, it prints step-by-step instructions. To point it at a custom location:
+
+```bash
+SKILL_AGENT_DIR=/path/to/ai-skill-agenst bash .ai/bootstrap.sh
 ```
 
 ---
@@ -82,8 +102,8 @@ git commit -m "chore: init AI memory"
 agents/          Phase-tagged agent personas (00–03)
 rules/           Always-active rules (.mdc) loaded into the AI context
 skills/          Reusable skills organized by workflow phase
-setup.sh         Universal setup — Mac / Linux / WSL
-setup.ps1        Universal setup — Windows PowerShell
+memory-templates/ Markdown templates for .ai/memory/ and .ai/discussions/
+setup.sh         Universal setup — Mac / Linux / WSL / Windows (Git Bash)
 ```
 
 ---
@@ -97,6 +117,7 @@ setup.ps1        Universal setup — Windows PowerShell
 | 2 · Implement | `tdd`, `clean-code`, `split-to-prs` |
 | 3 · Review | `security-review`, `qa-checklist` |
 | 4 · Ship | `pr-ship`, `babysit` |
+| Discussion | `open-discussion`, `respond-discussion`, `close-discussion` |
 | Tooling | `init-memory`, `canvas`, `shell`, `create-skill`, `create-rule`, `create-subagent` |
 
 ---
@@ -146,6 +167,27 @@ Every agent must:
 2. **State the current phase out loud** before doing any work
 3. **Read back** every file after writing — do not report success without verifying
 4. **Never infer** file state from conversation — read the actual file
+
+---
+
+## Discussion system
+
+When a decision needs debate before committing to a design, use the discussion system to get structured input from all 4 agent roles.
+
+```
+.ai/discussions/
+├── 2026-04-29-your-topic.md          ← append-only thread (BA → Architect → Engineer → QA)
+└── summaries/
+    └── 2026-04-29-your-topic-summary.md  ← synthesized output
+```
+
+| Step | Command | What happens |
+|------|---------|-------------|
+| 1 | `/open-discussion` | Human creates a thread with the topic |
+| 2 | `/respond-discussion` (×4) | Each agent appends their perspective in round-robin |
+| 3 | Set `status: closed`, run `/close-discussion` | Generates a structured summary |
+
+The summary can be referenced from ADRs or phase handoffs.
 
 ---
 
