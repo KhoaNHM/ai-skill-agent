@@ -1,0 +1,43 @@
+---
+type: discussion-summary
+topic: "[copy from thread frontmatter]"
+source-thread: "../YYYY-MM-DD-<slug>.md"
+closed-date: YYYY-MM-DD
+participants: [ba-strategist, architect, engineer, qa-security]
+rounds-completed: N
+summarized-by: [agent role]
+---
+
+# Discussion Summary: [topic]
+
+## Opening Topic
+[One-paragraph restatement of the original question or idea.]
+
+## Key Points by Role
+
+### BA / Requirements Perspective
+- [point]
+
+### Architecture Perspective
+- [point]
+
+### Engineering Perspective
+- [point]
+
+### QA / Security Perspective
+- [point]
+
+## Areas of Agreement
+[What all (or most) roles converged on.]
+
+## Areas of Disagreement
+[Where roles diverged and why — do not hide conflicts, they are valuable signal.]
+
+## Consensus / Decision
+[The clearest conclusion the discussion reached. If no consensus was reached, say so explicitly and state the open fork that remains.]
+
+## Open Questions
+- [ ] [question raised but not resolved]
+
+## Recommended Next Steps
+- [ ] [action item — suggested owner in brackets]
