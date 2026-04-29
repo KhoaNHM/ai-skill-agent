@@ -141,9 +141,9 @@ Directory structure:
 ```
 
 Three skills govern the system:
-- `skills/discuss/open-discussion.md` — human creates a thread with a topic and frontmatter
-- `skills/discuss/respond-discussion.md` — each agent appends their perspective in round-robin order (BA → Architect → Engineer → QA)
-- `skills/discuss/close-discussion.md` — after human sets `status: closed`, an agent generates a structured summary
+- `skills/discuss/open-discussion/SKILL.md` — human creates a thread with a topic and frontmatter
+- `skills/discuss/respond-discussion/SKILL.md` — each agent appends their perspective in round-robin order (BA → Architect → Engineer → QA)
+- `skills/discuss/close-discussion/SKILL.md` — after human sets `status: closed`, an agent generates a structured summary
 
 The `next-responder` field in each thread's frontmatter tells the human which agent to invoke next. Discussion threads are append-only — never rewrite prior contributions.
 

@@ -56,7 +56,7 @@ Next-role mapping:
 
 After appending your response, update these two frontmatter fields in place:
 - `next-responder:` → set to the next role
-- `round:` → increment by 1 only when `qa-security` has just responded (full cycle complete)
+- `round:` → keep the same until `qa-security` has just responded, then increment by 1 for the next cycle
 
 Read the file back immediately after writing to confirm the appended section and updated frontmatter are present.
 
