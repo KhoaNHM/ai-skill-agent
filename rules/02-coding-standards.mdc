@@ -1,9 +1,93 @@
 ---
+<<<<<<< HEAD
+description: Coding standards — universal principles with language/framework/database detection
+=======
 description: Language-agnostic coding standards with detection-driven language/framework/database skills.
+>>>>>>> main
 alwaysApply: true
 ---
 
 # Coding Standards
+
+## Language Detection
+
+At the start of any coding task, detect the project stack and load the matching skills.
+
+### Step 0 — Check `.ai/stack.json` override (highest priority)
+
+If `.ai/stack.json` exists at the project root, use it instead of auto-detection. Skip Steps 1–4.
+
+Format:
+```json
+{
+  "lang": "typescript",
+  "frontend": ["nextjs"],
+  "databases": ["postgresql", "redis"]
+}
+```
+
+Any field can be omitted to fall back to auto-detection for that category.
+
+### Step 1 — Check tech-stack.md
+
+If `.ai/memory/context/tech-stack.md` exists and lists the confirmed stack, use it. Skip Steps 2–4.
+
+### Step 2 — Detect backend language
+
+Check project root for these marker files. **Load all that match** — a monorepo may have multiple.
+
+| Marker files | Language skill to load |
+|---|---|
+| `tsconfig.json` or `*.ts` files | `skills/tooling/lang/typescript` |
+| `pyproject.toml`, `setup.py`, `requirements.txt`, `Pipfile` | `skills/tooling/lang/python` |
+| `go.mod` | `skills/tooling/lang/go` |
+| `pom.xml`, `build.gradle`, `build.gradle.kts` | `skills/tooling/lang/java` |
+| `Cargo.toml` | `skills/tooling/lang/rust` |
+| `*.csproj`, `*.sln` | `skills/tooling/lang/csharp` |
+| `composer.json` + `*.php` | `skills/tooling/lang/php` |
+| `Gemfile` + `*.rb` | `skills/tooling/lang/ruby` |
+
+**Multiple matches (monorepo):** Load all matched lang skills. State which ones were loaded and ask the human to confirm the primary language if more than one is detected.
+
+### Step 3 — Detect frontend framework
+
+Check `package.json` `dependencies` and `devDependencies`. **Precedence — first match only:**
+
+1. `"next"` present → load `skills/tooling/frontend/nextjs` (includes React — do not also load react)
+2. `"@angular/core"` present → load `skills/tooling/frontend/angular`
+3. `"vue"` present → load `skills/tooling/frontend/vue`
+4. `"svelte"` present → load `skills/tooling/frontend/svelte`
+5. `"react"` present (no next) → load `skills/tooling/frontend/react`
+
+**No `package.json`:** skip frontend detection.
+
+### Step 4 — Detect database
+
+Check `package.json`, `requirements.txt`, `go.mod`, `pom.xml`, and `prisma/schema.prisma`.
+**Load all that match** — projects routinely use more than one database.
+
+| Marker | Database skill to load |
+|---|---|
+| `mongoose`, `mongodb`, `pymongo`, `motor`, `mongo-driver` | `skills/tooling/database/mongodb` |
+| `pg`, `psycopg2`, `psycopg`, `lib/pq`, `npgsql` | `skills/tooling/database/postgresql` |
+| `mysql2`, `mysqlclient`, `go-sql-driver/mysql`, `mysql-connector` | `skills/tooling/database/mysql` |
+| `redis`, `ioredis`, `aioredis`, `go-redis`, `StackExchange.Redis` | `skills/tooling/database/redis` |
+| `better-sqlite3`, `sqlite3`, `mattn/go-sqlite3` | `skills/tooling/database/sqlite` |
+| `prisma/schema.prisma` file exists | `skills/tooling/database/prisma` |
+| `@elastic/elasticsearch`, `elasticsearch-py`, `olivere/elastic` | `skills/tooling/database/elasticsearch` |
+
+### Step 5 — Announce and confirm
+
+After detection, output a one-line summary before starting any work:
+
+```
+Stack detected: [lang] + [frontend] + [databases]
+Skills loaded: skills/tooling/lang/X, skills/tooling/frontend/Y, skills/tooling/database/Z
+```
+
+If nothing was detected: apply universal principles only and ask the human to specify the stack or create `.ai/stack.json`.
+
+---
 
 ## Git policy
 
@@ -24,6 +108,16 @@ For every non-trivial request, first output a short JSON spec, then execute it:
 
 Skip the JSON only for pure acknowledgments ("ok", "thanks"). Any code/docs/planning change → JSON first.
 
+<<<<<<< HEAD
+## Functions (universal)
+
+- **Single responsibility:** one task per function; if it validates + fetches + transforms, split into named steps.
+- **Prefer pure:** same inputs → same output, no side effects. Keep I/O (DB, network) in a thin boundary layer.
+- **Keep small:** ~20–30 lines. Extract when a function needs a comment to explain what a block does.
+- **Document public APIs:** one-line summary + param/return description for any function used outside its module.
+
+## SOLID
+=======
 ## Stack Detection & Skill Loading
 
 At the start of each coding session, detect the project stack:
@@ -45,6 +139,7 @@ At the start of each coding session, detect the project stack:
 - **Keep functions small:** One task per function, ~20–30 lines. If it validates + fetches + transforms, split into named steps.
 
 ### SOLID
+>>>>>>> main
 
 - **S** — One class/module, one reason to change.
 - **O** — Open for extension, closed for modification; prefer composition/DI over growing switch chains.
@@ -55,7 +150,7 @@ At the start of each coding session, detect the project stack:
 **Code smells reference:**
 
 | Smell | Symptom | Direction |
-|-------|---------|-----------|
+|---|---|---|
 | Rigidity | Small change forces many edits | Loosen coupling |
 | Fragility | Change breaks unrelated code | Stabilize boundaries |
 | Immobility | Hard to reuse | Extract shared pieces |
@@ -64,6 +159,9 @@ At the start of each coding session, detect the project stack:
 | Needless repetition | Same logic copied | DRY |
 | Opacity | Hard to read intent | Names, structure, small functions |
 
+<<<<<<< HEAD
+## DRY, YAGNI, KISS
+=======
 ### Performance
 
 - **Before coding:** Is this a hot path? Does it scale with data/traffic? N+1 risk?
@@ -71,15 +169,26 @@ At the start of each coding session, detect the project stack:
 - **Trade-off:** Correctness and clarity first; then optimize. Document when choosing simplicity over speed.
 
 ### DRY, YAGNI, KISS
+>>>>>>> main
 
 - **DRY:** One place per logic; extract helpers/modules; no copy-paste.
 - **YAGNI:** Build only what's needed now; skip speculative features.
 - **KISS:** Simplest solution that works; clarity over cleverness.
 
-### API Design (REST)
+<<<<<<< HEAD
+## Performance (universal)
 
-- **Design-first:** Clarify consumer, use cases, and constraints before coding; validate with request/response examples.
-- **Resources:** Plural nouns (`/users`); stateless requests.
+- **Before coding:** Is this a hot path? Does it scale with data/traffic? N+1 risk?
+- **While coding:** Batch over per-item; cache lookups; paginate list endpoints; index filters/sorts.
+- **Trade-off:** Correctness and clarity first; then optimize with measurement. Document when choosing simplicity over speed.
+
+## API Design (REST)
+=======
+### API Design (REST)
+>>>>>>> main
+
+- **Design-first:** Clarify consumer, use cases, and constraints before coding.
+- **Resources:** Plural nouns (`/users`); stateless requests; no verbs in paths.
 - **Verbs:** GET read, POST create, PUT/PATCH update, DELETE remove.
 - **Status codes:** 200, 201, 400, 401, 403, 404, 409, 500.
 - **Docs:** OpenAPI/Swagger; document all params, responses, and errors; keep in sync with code.
@@ -96,6 +205,9 @@ Apply when a pattern clearly solves a recurring problem. Don't apply speculative
 - **Adapter** — integrate external APIs
 - **Template Method** — shared algorithm, varying steps
 
+<<<<<<< HEAD
+Introduce a named pattern on the **third** clear repetition, not the first.
+=======
 ## Validation Loop
 
 After implementing code:
@@ -108,6 +220,7 @@ After implementing code:
 Only mark work done when all validations pass.
 
 Introduce a named pattern on the **third** clear repetition, not the first. Always add a short comment naming the pattern when you use one.
+>>>>>>> main
 
 ## Context Efficiency
 
@@ -116,6 +229,8 @@ Introduce a named pattern on the **third** clear repetition, not the first. Alwa
 - Progressive disclosure: start with signatures and summaries; read full implementations only when needed.
 - Diff-first reviews: read `git diff` before reading entire files.
 
-## Validation Loop
+## Validation Loop (universal)
 
-Implement → lint → typecheck (`tsc --noEmit`) → tests → fix → repeat until clean. Do not commit while lint or typecheck fails.
+`implement → lint → build/typecheck → test → fix → repeat`
+
+Use the language-specific commands from the loaded lang skill. Do not commit while lint or build fails.
