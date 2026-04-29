@@ -1,0 +1,18 @@
+---
+topic: "[One sentence describing the question or idea]"
+status: open
+opened-by: human
+opened-date: YYYY-MM-DD
+participants: [ba-strategist, architect, engineer, qa-security]
+next-responder: ba-strategist
+round: 1
+---
+
+## Opening Topic
+
+[Write the full topic here. Include:]
+[- What is the problem, question, or idea?]
+[- What constraints exist (time, tech, team size, existing decisions)?]
+[- What does a good outcome from this discussion look like?]
+
+[Delete these bracket-lines and write your actual topic above.]

@@ -126,6 +126,29 @@ When assigned work in this repo:
 5. Before implementation, ensure approval artifact exists (`approved-by: human`).
 6. Keep changes minimal, testable, and aligned with phase outputs.
 
+## Discussion System
+
+Agents can collaboratively explore problems and ideas via append-only discussion threads in `.ai/discussions/`.
+
+Directory structure:
+```
+.ai/
+├── memory/           (phase workflow state)
+└── discussions/
+    ├── YYYY-MM-DD-<slug>.md          (active or closed threads)
+    └── summaries/
+        └── YYYY-MM-DD-<slug>-summary.md  (synthesized final documents)
+```
+
+Three skills govern the system:
+- `skills/discuss/open-discussion/SKILL.md` — human creates a thread with a topic and frontmatter
+- `skills/discuss/respond-discussion/SKILL.md` — each agent appends their perspective in round-robin order (BA → Architect → Engineer → QA)
+- `skills/discuss/close-discussion/SKILL.md` — after human sets `status: closed`, an agent generates a structured summary
+
+The `next-responder` field in each thread's frontmatter tells the human which agent to invoke next. Discussion threads are append-only — never rewrite prior contributions.
+
+Templates: `memory-templates/discussion-thread.md.template` and `memory-templates/discussion-summary.md.template`.
+
 ## Quick Entry Prompt for Any AI
 
 Use this starter prompt:

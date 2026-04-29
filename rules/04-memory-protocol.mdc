@@ -104,6 +104,18 @@ The INDEX.md is the map. Keep it up to date after each phase completes.
 - [Anti-patterns](patterns/anti-patterns.md)
 ```
 
+## Discussion threads
+
+For cross-cutting questions that benefit from multiple agent perspectives, use `.ai/discussions/` rather than `.ai/memory/`.
+
+- Active threads are at `.ai/discussions/YYYY-MM-DD-<slug>.md` with `status: open`
+- Closed threads produce a summary at `.ai/discussions/summaries/YYYY-MM-DD-<slug>-summary.md`
+- Skills: `open-discussion`, `respond-discussion`, `close-discussion`
+- Discussion files are append-only — never rewrite prior contributions.
+- After a discussion is closed, reference the summary from any relevant handoff or ADR.
+
+At the start of a session, check if there are any open threads in `.ai/discussions/` that are relevant to your current phase. If one is waiting for your role (`next-responder` matches your agent), inform the human before proceeding with other work.
+
 ## Rules for writing to memory
 
 1. Never overwrite — always append to patterns files.
