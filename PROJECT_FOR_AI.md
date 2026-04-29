@@ -98,9 +98,8 @@ Required behavior from `rules/04-memory-protocol.mdc`:
 
 ## Setup and Bootstrap
 
-Setup scripts:
-- `setup.sh` for Mac/Linux/WSL
-- `setup.ps1` for Windows
+Setup script:
+- `setup.sh` for all platforms (Mac, Linux, WSL, Windows via Git Bash)
 
 Capabilities:
 - install rules/agents/skills into detected AI tools
