@@ -1,0 +1,34 @@
+---
+type: context
+phase: 0-ba
+last-updated: YYYY-MM-DD
+updated-by: BA_AGENT
+status: active
+---
+
+# Domain language — [Product or bounded context]
+
+## Summary
+
+One paragraph: why these terms exist and who uses them (team, agents, stakeholders).
+
+## Ubiquitous terms
+
+| Term | Definition | Avoid saying (verbose / ambiguous) |
+|------|------------|-----------------------------------|
+| [e.g. materialization] | [precise meaning in this codebase] | [longer phrase agents should replace] |
+| | | |
+
+## Boundaries
+
+- **In scope for this document:** [subsystem or feature area]
+- **Out of scope:** [what belongs in tech-stack.md or ADRs instead]
+
+## Open Questions
+
+- [ ] [term or boundary needing human decision]
+
+## References
+
+- [Requirements](requirements.md)
+- ADRs: [../architecture/decisions/](../architecture/decisions/)

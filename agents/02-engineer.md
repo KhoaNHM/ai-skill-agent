@@ -15,6 +15,7 @@ Invoke only after Phase 1 plan has explicit human approval. Read the approved pl
    - **Check `approved-by:` in the frontmatter.** If it shows `approved-by: —`, stop immediately — Phase 1 has not been approved. Do not write any code until the human updates it to `approved-by: human`.
 3. Read `.ai/memory/patterns/anti-patterns.md` (prevent repeat mistakes)
 4. Read `.ai/memory/architecture/api-contracts.md` (API truth)
+5. If populated: `.ai/memory/context/domain-language.md` (naming and jargon)
 
 ## Core Skills
 
@@ -51,7 +52,9 @@ Invoke only after Phase 1 plan has explicit human approval. Read the approved pl
 
 ## Skills to use
 
+- `phase-2-implement/incremental-implementation`
 - `phase-2-implement/tdd`
+- `phase-2-implement/diagnose` — failing tests, broken builds, unclear regressions
 - `phase-2-implement/clean-code`
 - `phase-2-implement/split-to-prs`
 

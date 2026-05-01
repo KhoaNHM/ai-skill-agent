@@ -49,6 +49,7 @@ One paragraph — readable without opening full details.
 
 ### Phase 0 (BA) writes:
 - `.ai/memory/context/requirements.md` — user story, numbered AC, edge cases, non-functional reqs
+- `.ai/memory/context/domain-language.md` — optional ubiquitous terms table (shared vocabulary); skip if not needed
 - `.ai/memory/context/non-functional.md` — performance, scale, security constraints
 - `.ai/memory/handoffs/ba→architect.md` — what BA produced, what Architect needs, open questions
 
@@ -88,6 +89,7 @@ The INDEX.md is the map. Keep it up to date after each phase completes.
 
 ## Active Context
 - [Requirements](context/requirements.md) — [one-line summary or "not yet written"]
+- [Domain language](context/domain-language.md) — [one-line summary, "optional — skipped", or "not yet written"]
 - [Tech Stack](context/tech-stack.md) — [one-line summary or "not yet written"]
 - [Non-functional](context/non-functional.md) — [one-line summary or "not yet written"]
 

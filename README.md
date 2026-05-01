@@ -59,10 +59,10 @@ Run from your project root, or use `--dir` to point at it from anywhere:
 ```bash
 # option 1 — cd into your project first
 cd /your/existing/project
-bash /path/to/ai-skill-agenst/setup.sh --project
+bash /path/to/ai-skill-agent/setup.sh --project
 
 # option 2 — stay anywhere, pass the path
-bash /path/to/ai-skill-agenst/setup.sh --project --dir /your/existing/project
+bash /path/to/ai-skill-agent/setup.sh --project --dir /your/existing/project
 ```
 
 Creates at project root:
@@ -88,10 +88,10 @@ When a developer clones a project that already has `.ai/` committed, they run on
 bash .ai/bootstrap.sh
 ```
 
-The script auto-detects the skill agent repo in common locations (`~/.ai-skill-agent`, `~/ai-skill-agenst`). If not found, it prints step-by-step instructions. To point it at a custom location:
+The script auto-detects the skill agent repo in common locations (`~/.ai-skill-agent`, `~/ai-skill-agent`). If not found, it prints step-by-step instructions. To point it at a custom location:
 
 ```bash
-SKILL_AGENT_DIR=/path/to/ai-skill-agenst bash .ai/bootstrap.sh
+SKILL_AGENT_DIR=/path/to/ai-skill-agent bash .ai/bootstrap.sh
 ```
 
 ---
@@ -114,7 +114,7 @@ setup.sh         Universal setup — Mac / Linux / WSL / Windows (Git Bash)
 |-------|--------|
 | 0 · Requirements | `gather-requirements`, `write-requirements-memory` |
 | 1 · Design | `system-design`, `api-design`, `write-adr`, `change-impact` |
-| 2 · Implement | `tdd`, `clean-code`, `split-to-prs` |
+| 2 · Implement | `incremental-implementation`, `tdd`, `diagnose`, `clean-code`, `split-to-prs` |
 | 3 · Review | `security-review`, `qa-checklist` |
 | 4 · Ship | `pr-ship`, `babysit` |
 | Discussion | `open-discussion`, `respond-discussion`, `close-discussion` |
@@ -143,6 +143,7 @@ Each project gets a `.ai/memory/` directory:
 ├── INDEX.md                          ← always read first — phase status + links
 ├── context/
 │   ├── requirements.md               ← BA output (Phase 0)
+│   ├── domain-language.md            ← optional BA — ubiquitous terms (Phase 0)
 │   ├── tech-stack.md                 ← Architect output (Phase 1)
 │   └── non-functional.md             ← BA output (Phase 0)
 ├── architecture/

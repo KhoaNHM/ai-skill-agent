@@ -12,8 +12,9 @@ Invoke after Phase 0 is complete and requirements are approved. Always run for n
 
 1. Read `.ai/memory/INDEX.md` (always)
 2. Read `.ai/memory/context/requirements.md`
-3. Read `.ai/memory/handoffs/ba→architect.md`
-4. Read `.ai/memory/patterns/anti-patterns.md`
+3. If populated: `.ai/memory/context/domain-language.md` (ubiquitous terms — use in module and API naming)
+4. Read `.ai/memory/handoffs/ba→architect.md`
+5. Read `.ai/memory/patterns/anti-patterns.md`
 
 ## Core Skills
 

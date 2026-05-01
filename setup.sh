@@ -122,7 +122,7 @@ Never assume phase status or file contents from conversation history. Read the a
 
 Memory structure:
 - `.ai/memory/INDEX.md` — phase status and links to all memory files
-- `.ai/memory/context/` — requirements, tech stack, non-functional
+- `.ai/memory/context/` — requirements, optional domain language, tech stack, non-functional
 - `.ai/memory/architecture/` — module map, API contracts, ADRs
 - `.ai/memory/handoffs/` — phase-to-phase transfer notes
 - `.ai/memory/patterns/` — solutions and anti-patterns
@@ -191,7 +191,7 @@ Never assume phase status or file contents from conversation history. Read the a
 
 ## Memory structure
 - `.ai/memory/INDEX.md` — phase status and links to all memory files
-- `.ai/memory/context/` — requirements, tech stack, non-functional
+- `.ai/memory/context/` — requirements, optional domain language, tech stack, non-functional
 - `.ai/memory/architecture/` — module map, API contracts, ADRs
 - `.ai/memory/handoffs/` — phase-to-phase transfer notes
 - `.ai/memory/patterns/` — solutions and anti-patterns
@@ -320,6 +320,7 @@ write_memory() {
 
 ## Active Context
 - [Requirements](context/requirements.md) — not yet written
+- [Domain language](context/domain-language.md) — optional; not yet written
 - [Tech Stack](context/tech-stack.md) — not yet written
 - [Non-functional](context/non-functional.md) — not yet written
 
@@ -361,6 +362,7 @@ PHEOF
   }
 
   write_placeholder "context/requirements.md"           context      0-ba         "Requirements"                   "gather-requirements"
+  write_placeholder "context/domain-language.md"        context      0-ba         "Domain language"                "gather-requirements"
   write_placeholder "context/tech-stack.md"             context      1-architect  "Tech Stack"                     "system-design"
   write_placeholder "context/non-functional.md"         context      0-ba         "Non-Functional Requirements"    "gather-requirements"
   write_placeholder "architecture/module-map.md"        architecture 1-architect  "Module Map"                     "system-design"
@@ -372,7 +374,7 @@ PHEOF
   write_placeholder "patterns/anti-patterns.md"         pattern      any          "Anti-patterns"                  "(append during Phase 2/3)"
 
   run touch "$mem/architecture/decisions/.gitkeep"
-  ok ".ai/memory/ created with 11 files"
+  ok ".ai/memory/ created with 12 files"
 }
 
 project_init() {

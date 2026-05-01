@@ -11,8 +11,9 @@ Use to produce the architecture plan for a new feature or significant change.
 
 1. `.ai/memory/INDEX.md`
 2. `.ai/memory/context/requirements.md`
-3. `.ai/memory/handoffs/ba→architect.md`
-4. `.ai/memory/patterns/anti-patterns.md`
+3. If populated: `.ai/memory/context/domain-language.md` (align module and type names with ubiquitous terms)
+4. `.ai/memory/handoffs/ba→architect.md`
+5. `.ai/memory/patterns/anti-patterns.md`
 
 ## Design checklist
 

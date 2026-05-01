@@ -71,7 +71,7 @@ DONE
 - Write new patterns and pitfalls discovered to `.ai/memory/patterns/` during implementation.
 
 **Agent:** `agents/02-engineer.md`
-**Skills:** `phase-2-implement/tdd`, `phase-2-implement/clean-code`
+**Skills:** `phase-2-implement/incremental-implementation`, `phase-2-implement/tdd`, `phase-2-implement/diagnose`, `phase-2-implement/clean-code`
 
 ## Phase 3 — Review
 
@@ -84,7 +84,7 @@ DONE
 - Findings appended to `.ai/memory/patterns/anti-patterns.md`
 
 **Agent:** `agents/03-qa-security.md`
-**Skills:** `phase-3-review/qa-checklist`, `phase-3-review/security-review`
+**Skills:** `phase-3-review/qa-checklist`, `phase-3-review/security-review`, `phase-2-implement/diagnose` (optional — hard failures during review)
 
 ### Phase 3 failure transitions
 

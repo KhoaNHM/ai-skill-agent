@@ -11,8 +11,9 @@ Use to verify implementation completeness against requirements before marking Ph
 
 1. **Read** `.ai/memory/INDEX.md` — confirm Phase 2 is ✅ Complete before starting QA.
 2. **Read** `.ai/memory/context/requirements.md` — acceptance criteria (count the ACs).
-3. **Read** `.ai/memory/handoffs/engineer→qa.md` — what was built.
-4. **Read** `.ai/memory/architecture/api-contracts.md` — expected API shape.
+3. If populated: **Read** `.ai/memory/context/domain-language.md` — interpret AC wording against shared terms.
+4. **Read** `.ai/memory/handoffs/engineer→qa.md` — what was built.
+5. **Read** `.ai/memory/architecture/api-contracts.md` — expected API shape.
 
 If Phase 2 is not ✅ Complete in INDEX.md, stop and alert the human — do not run QA on incomplete work.
 

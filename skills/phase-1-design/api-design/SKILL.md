@@ -10,7 +10,8 @@ Use before writing any controller, service, or DTO code. Design the contract fir
 ## Memory — read first
 
 1. `.ai/memory/context/requirements.md` — acceptance criteria drive the API
-2. `.ai/memory/architecture/api-contracts.md` — existing contracts to stay consistent with
+2. If populated: `.ai/memory/context/domain-language.md` — name paths, resources, and fields consistently
+3. `.ai/memory/architecture/api-contracts.md` — existing contracts to stay consistent with
 
 ## Contract-first process
 

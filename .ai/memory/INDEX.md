@@ -1,4 +1,4 @@
-# Memory Index — [Project Name]
+# Memory Index — ai-skill-agent
 
 > Read this first. Load only files relevant to your current phase.
 

@@ -23,6 +23,7 @@ Create all of the following directories and files in the **project being worked 
         ├── INDEX.md
         ├── context/
         │   ├── requirements.md
+        │   ├── domain-language.md
         │   ├── tech-stack.md
         │   └── non-functional.md
         ├── architecture/
@@ -58,6 +59,7 @@ Create all of the following directories and files in the **project being worked 
 
 ## Active Context
 - [Requirements](context/requirements.md) — not yet written
+- [Domain language](context/domain-language.md) — optional; not yet written
 - [Tech Stack](context/tech-stack.md) — not yet written
 - [Non-functional](context/non-functional.md) — not yet written
 
@@ -87,7 +89,7 @@ Never assume phase status or file contents from conversation history. Read the a
 
 ## Memory structure
 - `.ai/memory/INDEX.md` — phase status and links to all memory files
-- `.ai/memory/context/` — requirements, tech stack, non-functional
+- `.ai/memory/context/` — requirements, optional domain language, tech stack, non-functional
 - `.ai/memory/architecture/` — module map, API contracts, ADRs
 - `.ai/memory/handoffs/` — phase-to-phase transfer notes
 - `.ai/memory/patterns/` — solutions and anti-patterns
@@ -106,6 +108,7 @@ Each file gets frontmatter + heading `# [Title] — not yet written` + one line:
 | File | type | phase | Heading | Populate with skill |
 |------|------|-------|---------|---------------------|
 | `context/requirements.md` | context | 0-ba | Requirements | `gather-requirements` |
+| `context/domain-language.md` | context | 0-ba | Domain language | `gather-requirements` (optional section) |
 | `context/tech-stack.md` | context | 1-architect | Tech Stack | `system-design` |
 | `context/non-functional.md` | context | 0-ba | Non-Functional Requirements | `gather-requirements` |
 | `architecture/module-map.md` | architecture | 1-architect | Module Map | `system-design` |
@@ -136,7 +139,7 @@ Run `phase-0-requirements/gather-requirements` skill to populate this file.
 
 Tell the user:
 - `CLAUDE.md`, `AGENTS.md`, `WINDSURF.md`, `AI_CONTEXT.md` created at project root — any AI tool will auto-load the memory protocol on session start
-- `.ai/memory/` created with 11 files across 4 subdirectories
+- `.ai/memory/` created with 12 files across 4 subdirectories
 - Next step: run `phase-0-requirements/gather-requirements` to begin Phase 0
 
 **Git recommendation:** Commit everything to the project repo:

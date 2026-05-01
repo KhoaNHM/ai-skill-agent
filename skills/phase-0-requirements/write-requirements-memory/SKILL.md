@@ -91,7 +91,9 @@ In `.ai/memory/INDEX.md`, change Phase 0 row to:
 Add to Active Context section:
 ```
 - [Requirements](context/requirements.md) — [one-line summary of what is being built]
+- [Domain language](context/domain-language.md) — [one-line summary, or "optional — skipped"]
 ```
+(If `domain-language.md` was not filled during the interview, set the Domain language line to `optional — skipped`.)
 
 Add to Current Handoff section:
 ```
@@ -100,12 +102,13 @@ Add to Current Handoff section:
 
 ## Verify before finishing
 
-Read back all three files you just wrote and confirm:
+Read back every memory file you wrote or updated and confirm:
 
 | File | Check |
 |------|-------|
 | `context/requirements.md` | `status: active`, all ACs numbered, no empty sections |
+| `context/domain-language.md` | If you updated it: `status: active`, terms table present; otherwise INDEX should mark domain language as skipped |
 | `handoffs/ba→architect.md` | `status: active`, open questions listed |
-| `INDEX.md` | Phase 0 row shows ✅ Complete, requirements link present |
+| `INDEX.md` | Phase 0 row shows ✅ Complete; requirements + domain-language lines present (domain language may say skipped) |
 
-Do not report Phase 0 complete until all three checks pass.
+Do not report Phase 0 complete until all checks pass.

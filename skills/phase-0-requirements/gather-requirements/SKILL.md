@@ -11,6 +11,7 @@ Use when requirements are ambiguous, acceptance criteria are missing, or the tas
 
 1. `.ai/memory/INDEX.md`
 2. `.ai/memory/patterns/anti-patterns.md`
+3. If present: `.ai/memory/context/domain-language.md` (shared vocabulary for interviews and AC wording)
 
 ## Interview process
 
@@ -63,18 +64,29 @@ Work through each:
 List anything needing a human decision before planning can begin:
 - [ ] [Question] — Option A vs Option B
 
+### Step 6 — Optional domain language (ubiquitous language)
+
+If the product or codebase has **jargon, overloaded words, or long phrases agents should shorten**, capture them in **`.ai/memory/context/domain-language.md`**:
+
+- Use the [domain-language template](../../../memory-templates/domain-language.md.template) (or mirror its sections: Summary, Ubiquitous terms table, Boundaries, Open questions).
+- Each row: **term** → **definition** → **avoid saying** (the verbose way agents should replace).
+- Keep it **short**; link to `requirements.md` for behavior detail and to ADRs for decisions — do not duplicate full specs here.
+- If not needed for this feature, leave the placeholder or skip; still update **INDEX.md** Active Context to say "optional; skipped" or a one-line summary when populated.
+
 ## Output
 
 After completing the interview:
 
 1. Write to `.ai/memory/context/requirements.md` (use memory file template)
 2. **Read back** `.ai/memory/context/requirements.md` — confirm frontmatter `status: active` and all ACs are present.
-3. Write to `.ai/memory/handoffs/ba→architect.md`
-4. **Read back** `.ai/memory/handoffs/ba→architect.md` — confirm it was saved correctly.
-5. Update `.ai/memory/INDEX.md`:
+3. If Step 6 was used: write to `.ai/memory/context/domain-language.md`, then **read it back** — confirm terms table and `status: active`.
+4. Write to `.ai/memory/handoffs/ba→architect.md`
+5. **Read back** `.ai/memory/handoffs/ba→architect.md` — confirm it was saved correctly.
+6. Update `.ai/memory/INDEX.md`:
    - Phase 0 status → ✅ Complete
    - Add link to requirements.md with one-line summary
-6. **Read back** `.ai/memory/INDEX.md` — confirm Phase 0 row shows ✅ Complete.
-7. Present to human for review before handing off to Architect.
+   - Active Context: set [Domain language](context/domain-language.md) to a one-line summary, or `optional — skipped` if Step 6 was not used
+7. **Read back** `.ai/memory/INDEX.md` — confirm Phase 0 row shows ✅ Complete.
+8. Present to human for review before handing off to Architect.
 
 If any read-back fails (file missing or content wrong), fix and retry before presenting to human.

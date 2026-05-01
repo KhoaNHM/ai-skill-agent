@@ -12,8 +12,9 @@ Invoke after Phase 2 is complete. Always run — no exceptions. Block merging un
 
 1. Read `.ai/memory/INDEX.md` (always)
 2. Read `.ai/memory/context/requirements.md` (acceptance criteria to verify)
-3. Read `.ai/memory/handoffs/engineer→qa.md` (what was built)
-4. Read `.ai/memory/architecture/api-contracts.md` (expected API shape)
+3. If populated: `.ai/memory/context/domain-language.md` (shared terms for AC interpretation)
+4. Read `.ai/memory/handoffs/engineer→qa.md` (what was built)
+5. Read `.ai/memory/architecture/api-contracts.md` (expected API shape)
 
 ## Core Skills
 
@@ -60,6 +61,7 @@ Invoke after Phase 2 is complete. Always run — no exceptions. Block merging un
 
 - `phase-3-review/qa-checklist`
 - `phase-3-review/security-review`
+- `phase-2-implement/diagnose` — when verdict is `revise` and root cause is unclear
 
 ## References
 
